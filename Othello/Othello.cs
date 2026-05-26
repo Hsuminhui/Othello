@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Othello
 {
     public partial class Form1 : Form
     {
+        private SoundPlayer welcomeSound;
+        private SoundPlayer playSound;
+        private SoundPlayer winner_bSound;
+        private SoundPlayer winner_wSound;
+        private SoundPlayer ruleSound;
+
         private const int BoardSize = 8;
         private int cellSize;
 
@@ -23,6 +31,44 @@ namespace Othello
 
         private readonly Random random = new Random();
 
+        private void LoadSounds()
+        {
+            welcomeSound = CreateSoundPlayer("welcome.wav");
+            playSound = CreateSoundPlayer("play.wav");
+            winner_bSound = CreateSoundPlayer("black_win.wav");
+            winner_wSound = CreateSoundPlayer("white_win.wav");
+            ruleSound = CreateSoundPlayer("rule.wav");
+        }
+
+        private SoundPlayer CreateSoundPlayer(string fileName)
+        {
+            string path = Path.Combine(Application.StartupPath, "Sounds", fileName);
+
+            if (File.Exists(path))
+            {
+                SoundPlayer player = new SoundPlayer(path);
+                player.LoadAsync();
+                return player;
+            }
+
+            return null;
+        }
+
+        private void PlaySound(SoundPlayer player)
+        {
+            try
+            {
+                if (player != null)
+                {
+                    player.Stop();
+                    player.Play();
+                }
+            }
+            catch
+            {
+                // 音效播放失敗時不讓遊戲當掉
+            }
+        }
         private class GameState
         {
             public int[,] BoardSnap { get; set; }
@@ -34,6 +80,8 @@ namespace Othello
         public Form1()
         {
             InitializeComponent();
+
+            LoadSounds();
 
             pnlBoard.BackColor = Color.FromArgb(34, 139, 70);
 
@@ -67,6 +115,8 @@ namespace Othello
 
             UpdateUI();
             pnlBoard.Invalidate();
+
+            PlaySound(welcomeSound);
         }
 
         private int GetCellSize()
@@ -248,6 +298,7 @@ namespace Othello
 
             PushHistory();
             PlacePiece(row, col, currentPlayer);
+            PlaySound(playSound);
             NextTurn();
         }
 
@@ -432,6 +483,21 @@ namespace Othello
             }
         }
 
+        private void StopSound(SoundPlayer player)
+        {
+            try
+            {
+                if (player != null)
+                {
+                    player.Stop();
+                }
+            }
+            catch
+            {
+                // 停止音效失敗時，不讓遊戲當掉
+            }
+        }
+
         private void ShowResult()
         {
             int black;
@@ -439,19 +505,20 @@ namespace Othello
             CountPieces(out black, out white);
 
             string result;
+            SoundPlayer resultSound;
 
             if (black > white)
             {
                 result = "黑棋獲勝！";
-            }
-            else if (white > black)
-            {
-                result = "白棋獲勝！";
+                resultSound = winner_bSound;
             }
             else
             {
-                result = "平手！";
+                result = "白棋獲勝！";
+                resultSound = winner_wSound;
             }
+
+            PlaySound(resultSound);
 
             MessageBox.Show(
                 result + "\n\n黑棋: " + black + "\n白棋: " + white,
@@ -459,6 +526,8 @@ namespace Othello
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
             );
+
+            StopSound(resultSound);
         }
 
         private void PushHistory()
@@ -560,6 +629,7 @@ namespace Othello
 
             PushHistory();
             PlacePiece(aiMove.Y, aiMove.X, currentPlayer);
+            PlaySound(playSound);
             NextTurn();
         }
 
@@ -659,6 +729,8 @@ namespace Othello
 
         private void 遊戲說明ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            PlaySound(ruleSound);
+
             MessageBox.Show(
                 "【黑白棋 Othello 規則】\n\n" +
                 "1. 棋盤為 8×8，黑棋先手。\n\n" +
@@ -667,12 +739,17 @@ namespace Othello
                 "4. 如果輪到某方時沒有合法落點，該方會跳過回合。\n\n" +
                 "5. 雙方都無法落子，或棋盤已滿時，遊戲結束。\n\n" +
                 "6. 棋子數較多者獲勝；數量相同則平手。\n\n" +
-                "7. 盤面上的半透明小圓點代表目前可以落子的位置。\n\n"+ 
+                "7. 盤面上的半透明小圓點代表目前可以落子的位置。\n\n" +
                 "8. 若當回合沒有合法的落棋位置，會跳過該回合。",
                 "遊戲規則說明",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
             );
+
+            if (ruleSound != null)
+            {
+                ruleSound.Stop();
+            }
         }
 
         private void 關於ToolStripMenuItem_Click(object sender, EventArgs e)
