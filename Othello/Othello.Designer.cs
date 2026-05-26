@@ -43,8 +43,9 @@
             this.關於ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-
+            // 
             // pnlBoard
+            // 
             this.pnlBoard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlBoard.Location = new System.Drawing.Point(20, 90);
             this.pnlBoard.Name = "pnlBoard";
@@ -52,8 +53,9 @@
             this.pnlBoard.TabIndex = 0;
             this.pnlBoard.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBoard_Paint);
             this.pnlBoard.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlBoard_MouseClick);
-
+            // 
             // lblBlackScore
+            // 
             this.lblBlackScore.AutoSize = true;
             this.lblBlackScore.Font = new System.Drawing.Font("標楷體", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lblBlackScore.Location = new System.Drawing.Point(520, 130);
@@ -61,8 +63,9 @@
             this.lblBlackScore.Size = new System.Drawing.Size(85, 28);
             this.lblBlackScore.TabIndex = 1;
             this.lblBlackScore.Text = "黑棋:";
- 
+            // 
             // lblWhiteScore
+            // 
             this.lblWhiteScore.AutoSize = true;
             this.lblWhiteScore.Font = new System.Drawing.Font("標楷體", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lblWhiteScore.Location = new System.Drawing.Point(520, 190);
@@ -70,27 +73,30 @@
             this.lblWhiteScore.Size = new System.Drawing.Size(85, 28);
             this.lblWhiteScore.TabIndex = 2;
             this.lblWhiteScore.Text = "白棋:";
-
+            // 
             // lblStatus
+            // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("標楷體", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lblStatus.Location = new System.Drawing.Point(20, 610);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(143, 28);
+            this.lblStatus.Size = new System.Drawing.Size(158, 28);
             this.lblStatus.TabIndex = 3;
             this.lblStatus.Text = "輪到: 黑棋";
-
+            // 
             // btnNewGame
+            // 
             this.btnNewGame.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnNewGame.Location = new System.Drawing.Point(520, 480);
             this.btnNewGame.Name = "btnNewGame";
             this.btnNewGame.Size = new System.Drawing.Size(120, 40);
             this.btnNewGame.TabIndex = 4;
-            this.btnNewGame.Text = "新遊戲";
+            this.btnNewGame.Text = "重新開始";
             this.btnNewGame.UseVisualStyleBackColor = true;
             this.btnNewGame.Click += new System.EventHandler(this.btnNewGame_Click);
-
+            // 
             // btnUndo
+            // 
             this.btnUndo.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnUndo.Location = new System.Drawing.Point(520, 535);
             this.btnUndo.Name = "btnUndo";
@@ -99,8 +105,9 @@
             this.btnUndo.Text = "悔棋";
             this.btnUndo.UseVisualStyleBackColor = true;
             this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
-
+            // 
             // mode
+            // 
             this.mode.FormattingEnabled = true;
             this.mode.Items.AddRange(new object[] {
             "人 vs 人",
@@ -110,34 +117,40 @@
             this.mode.Name = "mode";
             this.mode.Size = new System.Drawing.Size(180, 26);
             this.mode.TabIndex = 6;
-
+            // 
             // timerAI
+            // 
             this.timerAI.Interval = 500;
-
+            // 
             // menuStrip1
+            // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.遊戲說明ToolStripMenuItem,
             this.關於ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(720, 32);
+            this.menuStrip1.Size = new System.Drawing.Size(720, 31);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
-
+            // 
             // 遊戲說明ToolStripMenuItem
+            // 
             this.遊戲說明ToolStripMenuItem.Name = "遊戲說明ToolStripMenuItem";
-            this.遊戲說明ToolStripMenuItem.Size = new System.Drawing.Size(134, 28);
+            this.遊戲說明ToolStripMenuItem.Size = new System.Drawing.Size(134, 27);
             this.遊戲說明ToolStripMenuItem.Text = "遊戲規則說明";
             this.遊戲說明ToolStripMenuItem.Click += new System.EventHandler(this.遊戲說明ToolStripMenuItem_Click);
-
+            // 
             // 關於ToolStripMenuItem
+            // 
             this.關於ToolStripMenuItem.Name = "關於ToolStripMenuItem";
-            this.關於ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
+            this.關於ToolStripMenuItem.Size = new System.Drawing.Size(62, 27);
             this.關於ToolStripMenuItem.Text = "關於";
             this.關於ToolStripMenuItem.Click += new System.EventHandler(this.關於ToolStripMenuItem_Click);
-
+            // 
             // Form1
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 680);
@@ -157,6 +170,7 @@
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
